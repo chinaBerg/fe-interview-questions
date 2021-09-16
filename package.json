@@ -1,0 +1,27 @@
+{
+  "name": "fe-interview-questions",
+  "version": "1.0.0",
+  "description": "当代前端面试八股文、大厂前端面试真题",
+  "main": "index.js",
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chinaBerg/fe-interview-questions.git"
+  },
+  "keywords": [
+    "前端面试题"
+  ],
+  "author": "刘顺利",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chinaBerg/fe-interview-questions/issues"
+  },
+  "homepage": "https://github.com/chinaBerg/fe-interview-questions#readme",
+  "devDependencies": {
+    "vuepress": "^2.0.0-beta.26"
+  }
+}
