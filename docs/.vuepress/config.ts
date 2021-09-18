@@ -10,10 +10,9 @@ module.exports = {
         link: '/',
       },
       {
-        text: '导航列表',
+        text: '面试八股文',
         children: [
-          '/company/alibaba.md',
-          '/company/tencent.md',
+          '/category/Vue.md',
         ],
       },
       {
