@@ -1,26 +1,27 @@
 ---
 home: true
-heroImage: ''
-heroAlt: 'logo'
-heroText: "一个文本"
-tagline: "副标题"
+logo: /images/logo.png
+heroImage: /images/home-logo.png
+heroAlt: logo
+heroText: 面试宝典
+tagline: 用心收录全网高质量前端面试题、各大互联网面试题
 
 actions:
-  - text: 快速上手
-    link: /
+  - text: 开始学习
+    link: /overview.md
     type: primary
-  - text: 项目简介
-    link: /
+  - text: 加群讨论
+    link: /organization.md
     type: secondary
 
 features:
-  - title: 简洁至上
-    details: 以 Markdown 为中心的项目结构，以最少的配置帮助你专注于写作。
-  - title: Vue 驱动
-    details: 享受 Vue 的开发体验，可以在 Markdown 中使用 Vue 组件，又可以使用 Vue 来开发自定义主题。
-  - title: 高性能
-    details: VuePress 会为每个页面预渲染生成静态的 HTML，同时，每个页面被加载的时候，将作为 SPA 运行。
+  - title: 各科八股文
+    details: 精心收录前端各技术领域/框架的基础面试题、进阶内容，让你有足够题目可刷
+  - title: 大厂面试题
+    details: 正如《五年高考三年模拟》一般，通过强化练习大厂面试题，做到高段位面试时脑中有货、心中不慌
+  - title: 面试经验
+    details: 总结面试经验、分析面试套路，增强临场反应和发挥的能力
 
-footer: <div>asdasdsa</div>
+footer: 联系我 邮箱：1563940776@qq.com
 footerHtml: true
 ---
