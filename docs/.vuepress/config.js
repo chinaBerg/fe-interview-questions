@@ -16,6 +16,7 @@ module.exports = {
       {
         text: '面试八股文',
         children: [
+          '/category/Html.md',
           '/category/Vue.md',
         ],
       },
