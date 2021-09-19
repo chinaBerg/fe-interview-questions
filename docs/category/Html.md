@@ -79,7 +79,14 @@ ent，缺点是对于网页代码的容错性不高，也就是说对网页代�
 - **Blink**：谷歌在 Chromium Blog 上发表博客，称将与苹果的开源浏览器核心 Webkit 分道扬镳，在 Chromium 项目中研发 Blink 渲染引擎（即浏览器核心），内置于 Chrome 浏览器之中。其实 Blink 引擎就是 Webkit 的一个分支，就像 webkit 是
 KHTML 的分支一样。Blink 引擎现在是谷歌公司与 Opera Software 共同研发，上面提到过的，Opera 弃用了自己的 Presto内核，加入 Google 阵营，跟随谷歌一起研发 Blink。
 
-### 9.浏览器的渲染原理？
+### 9.主流浏览器内核私有属性css前缀是什么？
+
+- mozilla 内核 （firefox,flock 等）    -moz
+- webkit  内核 （safari,chrome 等）   -webkit
+- opera   内核 （opera 浏览器）        -o
+- trident 内核 （ie 浏览器）           -ms
+
+### 10.浏览器的渲染原理？
 
 - 首先解析收到的文档，根据文档定义构建一棵 DOM 树，DOM 树是由 DOM 元素及属性节点组成的
 - 然后对 CSS 进行解析，生成 CSSOM 规则树。
@@ -93,6 +100,125 @@ KHTML 的分支一样。Blink 引擎现在是谷歌公司与 Opera Software 共�
 [《前端必读：浏览器内部工作原理》](https://kb.cnblogs.com/page/129756/)
 [《深入浅出浏览器渲染原理》](https://blog.fundebug.com/2019/01/03/understand-browser-rendering/)
 
+### 11.说下meta标签的作用以及常用meta标签有哪些？
+
+- `<meta>`元素可提供有关页面的元信息（meta-information），比如针对搜索引擎和更新频度的描述和关键词。
+- `<meta>` 标签位于文档的头部，不包含任何内容。`<meta>`标签的属性定义了与文档相关联的名称/值对。
+
+```html
+<!-- 声明文档使用的字符编码 -->
+<meta charset="utf-8">
+<!-- 优先使用 IE 最新版本和 Chrome -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<!-- 页面描述 -->
+<meta name="description" content="不超过150个字符"/>
+<!-- 页面关键词者 -->
+<meta name="keywords" content=""/>
+<!-- 网页作者 -->
+<meta name="author" content="name, email@gmail.com"/>
+<!-- 搜索引擎抓取 -->
+<meta name="robots" content="index,follow"/>
+<!-- 为移动设备添加 viewport -->
+<meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+<!-- IOS 设备 begin -->
+<meta name="apple-mobile-web-app-title" content="标题">
+<!-- 添加到主屏后的标题（iOS 6 新增） -->
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<!-- 是否启用 WebApp 全屏模式，删除苹果默认的工具栏和菜单栏 -->
+<meta name="apple-itunes-app" content="app-id=myAppStoreID, affiliate-data=myAffiliateData, app-argument=myURL" />
+<!-- 添加智能 App 广告条 Smart App Banner（iOS 6+ Safari） -->
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<!-- 设置苹果工具栏颜色 -->
+<meta name="format-detection" content="telphone=no, email=no"/>
+<!-- 启用360浏览器的极速模式(webkit) -->
+<meta name="renderer" content="webkit">
+<!-- 避免IE使用兼容模式 -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<!-- 不让百度转码 -->
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓 -->
+<meta name="HandheldFriendly" content="true">
+<!-- 微软的老式浏览器 -->
+<meta name="MobileOptimized" content="320">
+<!-- uc强制竖屏 -->
+<meta name="screen-orientation" content="portrait">
+<!-- QQ强制竖屏 -->
+<meta name="x5-orientation" content="portrait">
+<!-- UC强制全屏 -->
+<meta name="full-screen" content="yes">
+<!-- QQ强制全屏 -->
+<meta name="x5-fullscreen" content="true">
+<!-- UC应用模式 -->
+<meta name="browsermode" content="application">
+<!-- QQ应用模式 -->
+<meta name="x5-page-mode" content="app">
+<!-- windows phone 点击无高光 -->
+<meta name="msapplication-tap-highlight" content="no">
+<!-- 设置页面不缓存 -->
+<meta http-equiv="pragma" content="no-cache">
+<!-- 设置页面不缓存 -->
+<meta http-equiv="cache-control" content="no-cache">
+<!-- 设置页面不缓存 -->
+<meta http-equiv="expires" content="0">
+```
+
+### 12.什么是渐进增强和优雅降级？
+
+- **渐进增强**是针对低版本浏览器进行构建页面，保证最基本的功能，然后再针对高级浏览器进行效果、交互等改进和追加功能达到更好的用户体验
+- **优雅降级**是对高版本浏览器构建完整的功能，然后再针对低版本浏览器进行兼容
+
+### 13.说下iframe的作用及存在的问题？
+
+- 作用：
+  - 创建包含另外一个文档的内联框架（即行内框架）
+- 缺点：
+  - iframe 会阻塞主页面的 onload 事件。window 的 onload 事件需要在所有iframe 加载完毕后（包含里面的元素）才会触发。在 Safari 和 Chrome 里，通过 JavaScript 动态设置 iframe 的 src 可以避免这种阻塞情况。
+  - 搜索引擎的检索程序无法解读这种页面，不利于网页的SEO
+  - iframe和主页面共享连接池，而浏览器对相同域的连接有限制，所以会影响页面的并行加载。
+  - 浏览器的后退按钮失效
+  - 小型的移动设备无法完全显示框架
+
+### 14.async和defer的作用是什么？有什么区别？
+
+- `script`标签没有`defer`或`async`，浏览器会立即加载并执行指定的脚本，也就是说不等待后续载入的文档元素，读到就加载并执行
+- `defer`属性表示延迟执行引入的JavaScript，即这段JavaScript加载时HTML并未停止解析，这两个过程是并行的。当整个document解析完毕后再执行脚本文件，在 `DOMContentLoaded`事件触发之前完成。多个脚本按顺序执行
+- `async`属性表示异步执行引入的JavaScript，与`defer`的区别在于，如果已经加载好，就会开始执行，也就是说它的执行仍然会阻塞文档的解析，只是它的加载过程不会阻塞。多个脚本的执行顺序无法保证。
+
+### 15.说下你对语义化的理解？
+
+- 用正确的标签做正确的事情
+- html 语义化让页面的内容结构化，结构更清晰，便于对浏览器、搜索引擎解析
+- 即使在没有样式 CSS 情况下也以一种文档格式显示，并且是容易阅读的
+- 搜索引擎的爬虫也依赖于 HTML 标记来确定上下文和各个关键字的权重，利于SEO
+- 对读屏器优化，有利于无障碍阅读
+- 使阅读源代码的人对网站更容易将网站分块，便于阅读维护理解
+
+### 16.Html5新增了哪些特性？
+
+- HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，多任务等功能的增加：
+  - 绘图`canvas`元素
+  - 音频`video`和视频`audio`元素;
+  - 本地离线存储`localStorage`长期存储数据，浏览器关闭后数据不丢失;`sessionStorage`的数据在浏览器关闭后自动删除;
+  - 语意化更好的内容元素，比如`article`、`footer`、`header`、`nav`、`section`
+  - 表单控件，`calendar`、`date`、`time`、`email`、`url`、`search`
+  - 新的技术`webworker`, `websocket`
+  - 新的文档属性`document.visibilityState`
+
+- 移除的元素有：
+  - 纯表现的元素`basefont`、`big`、`center`、`font`、`s`
+  - `strike`，`tt`、`u`
+  - 对可用性产生负面影响的元素`frame`、`frameset`、`noframes`
+
+### 17.如何处理 HTML5 新标签的浏览器兼容问题？
+
+- IE8/IE7/IE6 支持通过 document.createElement 方法产生的标签，可以利用这一特性让这些浏览器支持 HTML5 新标签，浏览器支持新标签后，还需要添加标签默认的样式。
+- 使用成熟的框架如`html5shiv`：
+```html
+<!--[if lt IE 9]>
+  <script> src="https://cdn.jsdelivr.net/npm/html5shiv/dist/html5shiv.min.js"</script>
+<![endif]-->
+```
+`[if lte IE 9]……[endif]`判断IE的版本，限定只有IE9以下浏览器版本需要执行的语句。
 
 ## 参考
 
