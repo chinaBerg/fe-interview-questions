@@ -230,29 +230,272 @@ CSS的优先级是根据样式声明的特殊性值来判断的。选择器的�
 
 ### 如何使用css实现一个三角形？
 
+将一个div的宽度和高度设置为0，然后设置边框样式。
+
+```css
+.triangle{
+  width: 0;
+  height: 0;
+  border: 50px solid transparent;
+  border-top-color: black ;
+}
+```
+
 ### 如何使用css实现等宽布局？
+
+```css
+.parent {
+  display: flex;
+}
+.child {
+  flex: 1;
+}
+```
 
 ### 如何使用css实现3栏布局（圣杯布局和双飞燕布局）？
 
-### 如何使用css实现左侧定宽，右侧自动铺满剩余空间的布局？
+- 圣杯布局是三列布局的一种实现，特点在于主体部分的dom放在前面优先加载。实现：
+```css
+.container {
+  padding-left: 220px;//为左右栏腾出空间
+  padding-right: 220px;
+}
+.left {
+  float: left;
+  width: 200px;
+  height: 400px;
+  background: red;
+  margin-left: -100%;
+  position: relative;
+  left: -220px;
+}
+.center {
+  float: left;
+  width: 100%;
+  height: 500px;
+  background: yellow;
+}
+.right {
+  float: left;
+  width: 200px;
+  height: 400px;
+  background: blue;
+  margin-left: -200px;
+  position: relative;
+  right: -220px;
+}
+
+<article class="container">
+  <div class="center">
+    <h2>圣杯布局</h2>
+  </div>
+  <div class="left"></div>
+  <div class="right"></div>
+</article>
+```
+
+- 双飞翼布局,同样也是三栏布局，在圣杯布局基础上进一步优化，解决了圣杯布局错乱问题，实现了内容与布局的分离。而且任何一栏都可以是最高栏，不会出问题:
+
+```css
+.container {
+  min-width: 600px;//确保中间内容可以显示出来，两倍left宽+right宽
+}
+.left {
+  float: left;
+  width: 200px;
+  height: 400px;
+  background: red;
+  margin-left: -100%;
+}
+.center {
+  float: left;
+  width: 100%;
+  height: 500px;
+  background: yellow;
+}
+.center .inner {
+  margin: 0 200px; //新增部分
+}
+.right {
+  float: left;
+  width: 200px;
+  height: 400px;
+  background: blue;
+  margin-left: -200px;
+}
+
+<article class="container">
+  <div class="center">
+    <div class="inner">双飞翼布局</div>
+  </div>
+  <div class="left"></div>
+  <div class="right"></div>
+</article>
+```
+
+### 如何使用css实现左侧定宽，右侧自适应铺满剩余空间的布局？
+
+- 利用弹性盒模型实现：
+  - 父元素设置弹性盒属性`display: flex;`
+  - 左侧div通过width固定死宽度
+  - 右侧的div通过`flex: 1;`
+
+```css
+.parent {
+  display: flex;
+}
+.left {
+  width: 200px;
+}
+.right: {
+  flex: 1;
+}
+```
+
+- 利用浮动：
+  - 左侧元素固定宽度，并且设置左浮动
+  - 右侧元素设置margin-left的值为左侧元素的宽度
+
+```css
+* {
+  box-sizing: border-box;
+}
+.left {
+  float: left;
+  width: 200px;
+  border: 1px solid #333;
+}
+.right {
+  margin-left:200px;
+  border: 1px solid #333;
+}
+```
+
+- 利用定位加外边距
+  - 父元素设置相对定位
+  - 左侧子元素设置绝对定位，left设置为0
+  - 右侧子元素设置margin-left的值为左侧元素的宽度
+
+```css
+.parent {
+  position: relative;
+}
+.left{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+  border: 1px solid #333;
+  background: #aaa;
+}
+.right {
+  margin-left:200px;
+  border: 1px solid #333;
+  background: #ccc;
+}
+```
+
+- 绝对定位（不建议该方式，失去了dom的流的特性）
+  - 父元素设置相对定位
+  - 左右子元素都通过定位实现
+
+- 通过浮动和`calc`计算属性
+  - 左侧div设置固定宽度，并且设置左浮动
+  - 右侧div宽度利用`calc`属性设置父元素宽度减去左侧div的宽度，并且设置右浮动
+  - 注意去浮动
+
+```css
+.left{
+  float: left;
+  width: 200px;
+  background: #aaa;
+}
+.right{
+  float: right;
+  width: calc(100% - 200px);
+  background: #ccc;
+}
+```
+
+参考[CSS布局 -- 左侧定宽，右侧自适应](https://www.cnblogs.com/imwtr/p/4440475.html)
 
 ### 如何使用css实现一个九宫格？
 
+参考[《css布局 - 九宫格布局的方法汇总》](https://www.cnblogs.com/padding1015/p/9566443.html)
+
 ### 如何使用css实现等高布局？
+
+参考[《CSS等高布局的7种方式》](https://www.cnblogs.com/xiaohuochai/p/5457127.html)
 
 ### 如何使用css实现一个未知宽度的正方形？
 
-### 如何实现元素水平排列？
+参考[《纯CSS实现正方形、自适应正方形方法》](https://blog.csdn.net/ztj771299799/article/details/79806769)
 
 ### 说下浮动的作用以及如何去除浮动？
 
+float 属性定义元素在哪个方向浮动。以往这个属性总应用于图像，使文本围绕在图像周围，不过在 CSS 中，任何元素都可以浮动。浮动元素会生成一个块级框，而不论它本身是何种元素。如果浮动非替换元素，则要指定一个明确的宽度；否则，它们会尽可能地窄。去除浮动的方法：
+
+- 方法1，利用clear属性
+  - 浮动元素尾部添加一个div设置类名为`clear`
+  - 定义全局公用去除浮动定类名`.clear { clear: both; }`
+
+- 方法2，父元素添加`clearfix`类名
+
+```css
+.clearfix::after {
+  display: block;
+  content: "";
+  clear: both;
+  visibility: hidden;
+  height: 0;
+}
+```
+
+- 方法3，直接给父元素定死高度
+
+- 方法4，直接给父元素设置`overflow: hidden;`
+
 ### 手机端如何适配？
+
+参考[《移动端适配方案》](https://zhuanlan.zhihu.com/p/101432990)
+参考[《移动端的3种适配方法》](https://segmentfault.com/a/1190000019677612)
 
 ### 如何自定义css滚动条效果？
 
+参考[《CSS3自定义滚动条样式》](https://www.cnblogs.com/ranyonsue/p/9487599.html)
+参考[《如何自定义CSS滚动条的样式？》](https://segmentfault.com/a/1190000017142511)
+
 ### 如何实现一条0.5px宽度的线？
 
+- 方法1，采用meta viewport的方式
+viewport只针对于移动端，只在移动端上才能看到效果。
+
+```html
+<meta name="viewport" content="width=device-width, initial-scale=0.5, minimum-scale=0.5, maximum-scale=0.5"/>
+```
+
+- 方法2，采用transform: scale()的方式
+```css
+transform: scale(0.5,0.5);
+```
 ### 如何实现单行/多行文本溢出省略？
+
+- 单行文本溢出
+
+```css
+overflow: hidden;
+text-overflow:ellipsis;
+white-space: nowrap;
+```
+
+- 多行文本溢出
+
+```css
+display: -webkit-box;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 3;
+overflow: hidden;
+```
 
 ## 参考
 
