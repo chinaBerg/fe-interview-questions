@@ -220,6 +220,24 @@ KHTML 的分支一样。Blink 引擎现在是谷歌公司与 Opera Software 共�
 ```
 `[if lte IE 9]……[endif]`判断IE的版本，限定只有IE9以下浏览器版本需要执行的语句。
 
+### 18.iframe有什么优缺点？
+
+- 优点：
+  - iframe允许将其他Web文档嵌入到当前文档中
+  - 如果有多个网页引用iframe，那么你只需要修改iframe的内容，就可以实现调用的每一个页面内容的更改，方便快捷
+  - 网页如果为了统一风格，头部和版本都是一样的，就可以写成一个页面，用iframe来嵌套，可以增加代码的可重用
+  - 如果遇到加载缓慢的第三方内容如图标和广告，这些问题可以由iframe来解决
+- 缺点：
+  - iframe会阻塞主页面的onload事件
+  - iframe和主页面共享连接池，而浏览器对相同域的连接有限制，所以会影响页面的并行加载
+  - iframe的内容无法被一些搜索引擎索引到，不利于SEO
+  - 很多的移动设备无法完全显示框架，设备兼容性差
+  - 存在[单击劫持](https://en.wikipedia.org/wiki/Clickjacking)等常见的安全隐患
+
+推荐阅读:
+  - [《从对象到iframe - 其他嵌入技术》](https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Multimedia_and_embedding/Other_embedding_technologies#%E5%AE%89%E5%85%A8%E9%9A%90%E6%82%A3)
+  - [《Web前端之iframe详解》](https://www.cnblogs.com/hq233/p/9849939.html)
+
 ## 参考
 
 - https://juejin.cn/post/6961222829979697165
