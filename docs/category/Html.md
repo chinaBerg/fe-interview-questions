@@ -238,6 +238,21 @@ KHTML 的分支一样。Blink 引擎现在是谷歌公司与 Opera Software 共�
   - [《从对象到iframe - 其他嵌入技术》](https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Multimedia_and_embedding/Other_embedding_technologies#%E5%AE%89%E5%85%A8%E9%9A%90%E6%82%A3)
   - [《Web前端之iframe详解》](https://www.cnblogs.com/hq233/p/9849939.html)
 
+### Html需要注意哪些SEO的问题？
+
+- 添加合理的TDK（title、description、keywords）：
+  - title值强调重点，重要关键词出现不要超过 2 次，不同页面 title 要有所不同
+  - description 把页面内容高度概括，长度合适，不可过分堆砌关键词，不同页面 description 有所不同
+  - keywords 列举出重要关键词即可
+- 语义化且符合W3C规范的HTML代码，目的是让搜索引擎容易理解网页
+- 重要内容HTML代码放在最前：搜索引擎抓取HTML顺序是从上到下，有的搜索引擎对抓取长度有限制
+- 少用iframe，搜索引擎不会抓取 iframe 中的内容
+- 非装饰性图片必须加alt
+- 好的友情链接和高质量的外链可以快速的提高你的网站权重
+- 重要内容不要用js输出：爬虫不会执行js获取内容
+
+推荐学习[《前端如何进行seo优化》](https://blog.csdn.net/yuyuking/article/details/89374794?utm_medium=distribute.pc_relevant.none-task-blog-title-8&spm=1001.2101.3001.4242)
+
 ## 参考
 
 - https://juejin.cn/post/6961222829979697165
